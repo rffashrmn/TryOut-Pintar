@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 router.get('/buy-credits', auth, async (req, res) => {
   try {
     const paymentLink = process.env.MAYAR_PAYMENT_LINK;
-    const [users] = await db.execute('SELECT email FROM users WHERE id = $1', [req.user.id]);
+    const [users] = await db.execute('SELECT email FROM public.users WHERE id = $1', [req.user.id]);
     const email = users[0].email;
     const url = `${paymentLink}?email=${encodeURIComponent(email)}&metadata=${encodeURIComponent(JSON.stringify({ user_id: req.user.id }))}`;
     res.json({ payment_url: url });
@@ -41,14 +41,14 @@ router.post('/webhook', async (req, res) => {
     const mayarCustomerId = data.customerId || (data.customer && data.customer.id);
     const metadata = data.metadata ? (typeof data.metadata === 'string' ? JSON.parse(data.metadata) : data.metadata) : null;
 
-    const [existingPayment] = await db.execute('SELECT id FROM payments WHERE payment_id = $1', [paymentId]);
+    const [existingPayment] = await db.execute('SELECT id FROM public.payments WHERE payment_id = $1', [paymentId]);
     if (existingPayment.length > 0) return res.status(200).json({ received: true, duplicate: true });
 
     let userId;
     if (metadata && metadata.user_id) {
       userId = metadata.user_id;
     } else if (customerEmail) {
-      const [users] = await db.execute('SELECT id FROM users WHERE email = $1', [customerEmail]);
+      const [users] = await db.execute('SELECT id FROM public.users WHERE email = $1', [customerEmail]);
       if (users.length > 0) userId = users[0].id;
     }
 
@@ -59,7 +59,7 @@ router.post('/webhook', async (req, res) => {
 
     // Capture Mayar Customer ID if provided and not already saved
     if (mayarCustomerId) {
-      await db.execute('UPDATE users SET mayar_customer_id = $1 WHERE id = $2 AND mayar_customer_id IS NULL', [mayarCustomerId, userId]);
+      await db.execute('UPDATE public.users SET mayar_customer_id = $1 WHERE id = $2 AND mayar_customer_id IS NULL', [mayarCustomerId, userId]);
     }
 
     // For "Usage-Based (credit)" products, Mayar may provide the credit amount directly.
@@ -74,9 +74,9 @@ router.post('/webhook', async (req, res) => {
     const conn = await db.getConnection();
     try {
       await conn.beginTransaction();
-      await conn.execute('UPDATE users SET credit_balance = credit_balance + $1 WHERE id = $2', [creditsToAdd, userId]);
+      await conn.execute('UPDATE public.users SET credit_balance = credit_balance + $1 WHERE id = $2', [creditsToAdd, userId]);
       await conn.execute(
-        'INSERT INTO payments (user_id, payment_id, amount, credits_added, status, transaction_type, description) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        'INSERT INTO public.payments (user_id, payment_id, amount, credits_added, status, transaction_type, description) VALUES ($1, $2, $3, $4, $5, $6, $7)',
         [userId, paymentId, amount, creditsToAdd, 'success', 'credit', 'Top-up Kredit via Mayar']
       );
       await conn.commit();
@@ -100,7 +100,7 @@ router.get('/history', auth, async (req, res) => {
   try {
     // Prevent caching for history
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    const [payments] = await db.execute('SELECT * FROM payments WHERE user_id = $1 ORDER BY created_at DESC', [req.user.id]);
+    const [payments] = await db.execute('SELECT * FROM public.payments WHERE user_id = $1 ORDER BY created_at DESC', [req.user.id]);
     res.json({ payments });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -112,7 +112,7 @@ const Mayar = require('../utils/mayar');
 // Sync balance with Mayar
 router.post('/sync-balance', auth, async (req, res) => {
   try {
-    const [users] = await db.execute('SELECT id, mayar_customer_id, credit_balance FROM users WHERE id = $1', [req.user.id]);
+    const [users] = await db.execute('SELECT id, mayar_customer_id, credit_balance FROM public.users WHERE id = $1', [req.user.id]);
     const user = users[0];
 
     if (!user.mayar_customer_id) {
@@ -129,7 +129,7 @@ router.post('/sync-balance', auth, async (req, res) => {
 
       if (!isNaN(balanceValue) && isFinite(balanceValue)) {
         const newBalance = Math.floor(balanceValue);
-        await db.execute('UPDATE users SET credit_balance = $1 WHERE id = $2', [newBalance, user.id]);
+        await db.execute('UPDATE public.users SET credit_balance = $1 WHERE id = $2', [newBalance, user.id]);
         return res.json({ balance: newBalance, synced: true });
       }
     }
@@ -138,7 +138,7 @@ router.post('/sync-balance', auth, async (req, res) => {
   } catch (err) {
     console.error('Sync balance error:', err);
     try {
-      const [users] = await db.execute('SELECT credit_balance FROM users WHERE id = $1', [req.user.id]);
+      const [users] = await db.execute('SELECT credit_balance FROM public.users WHERE id = $1', [req.user.id]);
       res.json({ balance: users[0]?.credit_balance || 0, synced: false, error: 'Connection failed' });
     } catch (dbErr) {
       res.json({ balance: 0, synced: false, error: 'Connection failed' });

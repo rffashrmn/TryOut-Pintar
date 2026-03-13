@@ -37,12 +37,12 @@ router.post('/register', authLimiter, [
 
     const { name, email, password } = req.body;
 
-    const [existing] = await db.execute('SELECT id FROM users WHERE email = $1', [email]);
+    const [existing] = await db.execute('SELECT id FROM public.users WHERE email = $1', [email]);
     if (existing.length > 0) return res.status(400).json({ error: 'Email sudah terdaftar' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const [result] = await db.execute(
-      'INSERT INTO users (name, email, password, credit_balance) VALUES ($1, $2, $3, $4) RETURNING id',
+      'INSERT INTO public.users (name, email, password, credit_balance) VALUES ($1, $2, $3, $4) RETURNING id',
       [name, email, hashedPassword, 0]
     );
 
@@ -71,7 +71,7 @@ router.post('/login', authLimiter, [
 
     const { email, password } = req.body;
 
-    const [users] = await db.execute('SELECT * FROM users WHERE email = $1', [email]);
+    const [users] = await db.execute('SELECT * FROM public.users WHERE email = $1', [email]);
     if (users.length === 0) return res.status(401).json({ error: 'Email atau password salah' });
 
     const user = users[0];
@@ -94,7 +94,7 @@ router.post('/login', authLimiter, [
 // Get current user
 router.get('/me', auth, async (req, res) => {
   try {
-    const [users] = await db.execute('SELECT id, name, email, role, credit_balance, created_at FROM users WHERE id = $1', [req.user.id]);
+    const [users] = await db.execute('SELECT id, name, email, role, credit_balance, created_at FROM public.users WHERE id = $1', [req.user.id]);
     if (users.length === 0) return res.status(404).json({ error: 'User tidak ditemukan' });
     res.json({ user: users[0] });
   } catch (err) {

@@ -46,9 +46,9 @@ async function startServer() {
     // Basic database health/schema check
     console.log('Checking database schema...');
     await db.execute(`
-      CREATE TABLE IF NOT EXISTS tryout_subtest_progress (
+      CREATE TABLE IF NOT EXISTS public.tryout_subtest_progress (
         id SERIAL PRIMARY KEY,
-        attempt_id INT NOT NULL REFERENCES attempts(id) ON DELETE CASCADE,
+        attempt_id INT NOT NULL REFERENCES public.attempts(id) ON DELETE CASCADE,
         subtest_name VARCHAR(100) NOT NULL,
         status VARCHAR(15) DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed')),
         started_at TIMESTAMP NULL,
