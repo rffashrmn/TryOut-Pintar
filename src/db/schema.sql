@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS quiz_packages (
   package_number INT NOT NULL,
   total_questions INT NOT NULL,
   time_minutes INT NOT NULL,
-  price_credit INT NOT NULL DEFAULT 5,
+  price_credit INT NOT NULL DEFAULT 250,
   UNIQUE (subtest, package_number)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS quiz_packages (
 CREATE TABLE IF NOT EXISTS tryout_packages (
   id SERIAL PRIMARY KEY,
   package_number INT NOT NULL UNIQUE,
-  price_credit INT NOT NULL DEFAULT 25
+  price_credit INT NOT NULL DEFAULT 1000
 );
 
 -- Tryout Package Subtests

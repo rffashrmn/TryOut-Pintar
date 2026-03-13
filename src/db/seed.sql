@@ -7,24 +7,24 @@ INSERT INTO users (name, email, password, role, credit_balance) VALUES
 
 -- Quiz Packages (7 subtes x 10 paket)
 INSERT INTO quiz_packages (subtest, package_number, total_questions, time_minutes, price_credit) VALUES
-('Penalaran Umum', 1, 30, 30, 0),('Penalaran Umum', 2, 30, 30, 1),('Penalaran Umum', 3, 30, 30, 1),('Penalaran Umum', 4, 30, 30, 1),('Penalaran Umum', 5, 30, 30, 1),
-('Penalaran Umum', 6, 30, 30, 1),('Penalaran Umum', 7, 30, 30, 1),('Penalaran Umum', 8, 30, 30, 1),('Penalaran Umum', 9, 30, 30, 1),('Penalaran Umum', 10, 30, 30, 1),
-('Pengetahuan & Pemahaman Umum', 1, 20, 15, 0),('Pengetahuan & Pemahaman Umum', 2, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 3, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 4, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 5, 20, 15, 1),
-('Pengetahuan & Pemahaman Umum', 6, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 7, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 8, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 9, 20, 15, 1),('Pengetahuan & Pemahaman Umum', 10, 20, 15, 1),
-('Pemahaman Bacaan & Menulis', 1, 20, 25, 0),('Pemahaman Bacaan & Menulis', 2, 20, 25, 1),('Pemahaman Bacaan & Menulis', 3, 20, 25, 1),('Pemahaman Bacaan & Menulis', 4, 20, 25, 1),('Pemahaman Bacaan & Menulis', 5, 20, 25, 1),
-('Pemahaman Bacaan & Menulis', 6, 20, 25, 1),('Pemahaman Bacaan & Menulis', 7, 20, 25, 1),('Pemahaman Bacaan & Menulis', 8, 20, 25, 1),('Pemahaman Bacaan & Menulis', 9, 20, 25, 1),('Pemahaman Bacaan & Menulis', 10, 20, 25, 1),
-('Pengetahuan Kuantitatif', 1, 20, 20, 0),('Pengetahuan Kuantitatif', 2, 20, 20, 1),('Pengetahuan Kuantitatif', 3, 20, 20, 1),('Pengetahuan Kuantitatif', 4, 20, 20, 1),('Pengetahuan Kuantitatif', 5, 20, 20, 1),
-('Pengetahuan Kuantitatif', 6, 20, 20, 1),('Pengetahuan Kuantitatif', 7, 20, 20, 1),('Pengetahuan Kuantitatif', 8, 20, 20, 1),('Pengetahuan Kuantitatif', 9, 20, 20, 1),('Pengetahuan Kuantitatif', 10, 20, 20, 1),
-('Literasi Bahasa Indonesia', 1, 30, 45, 0),('Literasi Bahasa Indonesia', 2, 30, 45, 1),('Literasi Bahasa Indonesia', 3, 30, 45, 1),('Literasi Bahasa Indonesia', 4, 30, 45, 1),('Literasi Bahasa Indonesia', 5, 30, 45, 1),
-('Literasi Bahasa Indonesia', 6, 30, 45, 1),('Literasi Bahasa Indonesia', 7, 30, 45, 1),('Literasi Bahasa Indonesia', 8, 30, 45, 1),('Literasi Bahasa Indonesia', 9, 30, 45, 1),('Literasi Bahasa Indonesia', 10, 30, 45, 1),
-('Literasi Bahasa Inggris', 1, 20, 20, 0),('Literasi Bahasa Inggris', 2, 20, 20, 1),('Literasi Bahasa Inggris', 3, 20, 20, 1),('Literasi Bahasa Inggris', 4, 20, 20, 1),('Literasi Bahasa Inggris', 5, 20, 20, 1),
-('Literasi Bahasa Inggris', 6, 20, 20, 1),('Literasi Bahasa Inggris', 7, 20, 20, 1),('Literasi Bahasa Inggris', 8, 20, 20, 1),('Literasi Bahasa Inggris', 9, 20, 20, 1),('Literasi Bahasa Inggris', 10, 20, 20, 1),
-('Penalaran Matematika', 1, 20, 45, 0),('Penalaran Matematika', 2, 20, 45, 1),('Penalaran Matematika', 3, 20, 45, 1),('Penalaran Matematika', 4, 20, 45, 1),('Penalaran Matematika', 5, 20, 45, 1),
-('Penalaran Matematika', 6, 20, 45, 1),('Penalaran Matematika', 7, 20, 45, 1),('Penalaran Matematika', 8, 20, 45, 1),('Penalaran Matematika', 9, 20, 45, 1),('Penalaran Matematika', 10, 20, 45, 1);
+('Penalaran Umum', 1, 30, 30, 0),('Penalaran Umum', 2, 30, 30, 250),('Penalaran Umum', 3, 30, 30, 250),('Penalaran Umum', 4, 30, 30, 250),('Penalaran Umum', 5, 30, 30, 250),
+('Penalaran Umum', 6, 30, 30, 250),('Penalaran Umum', 7, 30, 30, 250),('Penalaran Umum', 8, 30, 30, 250),('Penalaran Umum', 9, 30, 30, 250),('Penalaran Umum', 10, 30, 30, 250),
+('Pengetahuan & Pemahaman Umum', 1, 20, 15, 0),('Pengetahuan & Pemahaman Umum', 2, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 3, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 4, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 5, 20, 15, 250),
+('Pengetahuan & Pemahaman Umum', 6, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 7, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 8, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 9, 20, 15, 250),('Pengetahuan & Pemahaman Umum', 10, 20, 15, 250),
+('Pemahaman Bacaan & Menulis', 1, 20, 25, 0),('Pemahaman Bacaan & Menulis', 2, 20, 25, 250),('Pemahaman Bacaan & Menulis', 3, 20, 25, 250),('Pemahaman Bacaan & Menulis', 4, 20, 25, 250),('Pemahaman Bacaan & Menulis', 5, 20, 25, 250),
+('Pemahaman Bacaan & Menulis', 6, 20, 25, 250),('Pemahaman Bacaan & Menulis', 7, 20, 25, 250),('Pemahaman Bacaan & Menulis', 8, 20, 25, 250),('Pemahaman Bacaan & Menulis', 9, 20, 25, 250),('Pemahaman Bacaan & Menulis', 10, 20, 25, 250),
+('Pengetahuan Kuantitatif', 1, 20, 20, 0),('Pengetahuan Kuantitatif', 2, 20, 20, 250),('Pengetahuan Kuantitatif', 3, 20, 20, 250),('Pengetahuan Kuantitatif', 4, 20, 20, 250),('Pengetahuan Kuantitatif', 5, 20, 20, 250),
+('Pengetahuan Kuantitatif', 6, 20, 20, 250),('Pengetahuan Kuantitatif', 7, 20, 20, 250),('Pengetahuan Kuantitatif', 8, 20, 20, 250),('Pengetahuan Kuantitatif', 9, 20, 20, 250),('Pengetahuan Kuantitatif', 10, 20, 20, 250),
+('Literasi Bahasa Indonesia', 1, 30, 45, 0),('Literasi Bahasa Indonesia', 2, 30, 45, 250),('Literasi Bahasa Indonesia', 3, 30, 45, 250),('Literasi Bahasa Indonesia', 4, 30, 45, 250),('Literasi Bahasa Indonesia', 5, 30, 45, 250),
+('Literasi Bahasa Indonesia', 6, 30, 45, 250),('Literasi Bahasa Indonesia', 7, 30, 45, 250),('Literasi Bahasa Indonesia', 8, 30, 45, 250),('Literasi Bahasa Indonesia', 9, 30, 45, 250),('Literasi Bahasa Indonesia', 10, 30, 45, 250),
+('Literasi Bahasa Inggris', 1, 20, 20, 0),('Literasi Bahasa Inggris', 2, 20, 20, 250),('Literasi Bahasa Inggris', 3, 20, 20, 250),('Literasi Bahasa Inggris', 4, 20, 20, 250),('Literasi Bahasa Inggris', 5, 20, 20, 250),
+('Literasi Bahasa Inggris', 6, 20, 20, 250),('Literasi Bahasa Inggris', 7, 20, 20, 250),('Literasi Bahasa Inggris', 8, 20, 20, 250),('Literasi Bahasa Inggris', 9, 20, 20, 250),('Literasi Bahasa Inggris', 10, 20, 20, 250),
+('Penalaran Matematika', 1, 20, 45, 0),('Penalaran Matematika', 2, 20, 45, 250),('Penalaran Matematika', 3, 20, 45, 250),('Penalaran Matematika', 4, 20, 45, 250),('Penalaran Matematika', 5, 20, 45, 250),
+('Penalaran Matematika', 6, 20, 45, 250),('Penalaran Matematika', 7, 20, 45, 250),('Penalaran Matematika', 8, 20, 45, 250),('Penalaran Matematika', 9, 20, 45, 250),('Penalaran Matematika', 10, 20, 45, 250);
 
 -- Tryout Packages (10 paket)
 INSERT INTO tryout_packages (package_number, price_credit) VALUES
-(1, 0),(2, 10),(3, 10),(4, 10),(5, 10),(6, 10),(7, 10),(8, 10),(9, 10),(10, 10);
+(1, 0),(2, 1000),(3, 1000),(4, 1000),(5, 1000),(6, 1000),(7, 1000),(8, 1000),(9, 1000),(10, 1000);
 
 -- Tryout Subtests for each package
 INSERT INTO tryout_subtests (tryout_package_id, subtest, total_questions, time_minutes, sort_order)

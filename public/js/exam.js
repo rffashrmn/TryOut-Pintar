@@ -69,7 +69,14 @@ const ExamPage = {
   renderExam(container) {
     const questions = this.getCurrentQuestions();
     if (questions.length === 0) {
-      container.innerHTML = '<div class="container" style="padding-top:2rem;text-align:center"><p>Tidak ada soal tersedia.</p></div>';
+      container.innerHTML = `
+        <div class="container fade-in" style="padding:10rem 0;text-align:center">
+          <div style="font-size:4rem;margin-bottom:1.5rem">📂</div>
+          <h2 style="font-weight:700;margin-bottom:0.5rem">Tidak ada soal tersedia.</h2>
+          <p style="color:var(--text-muted);margin-bottom:2rem">Paket soal ini sedang diperbarui atau belum memiliki pertanyaan.</p>
+          <button class="btn btn-primary" onclick="App.navigate('${this.type === 'tryout' ? 'tryout' : 'quiz'}')">← Kembali ke Daftar</button>
+        </div>
+      `;
       return;
     }
 

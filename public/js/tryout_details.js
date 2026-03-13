@@ -30,10 +30,13 @@ const TryoutDetailsPage = {
     
     container.innerHTML = `
       <div class="container fade-in">
-        <div style="margin-bottom:2rem;display:flex;justify-content:space-between;align-items:end">
-          <div>
-            <h1 class="section-title">📝 Daftar Subtes</h1>
-            <p class="section-subtitle">Pilih subtes yang ingin dikerjakan. Urutan bebas.</p>
+        <div style="margin-bottom:2rem;display:flex;justify-content:space-between;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <button class="btn btn-outline btn-sm" style="width:fit-content" onclick="App.navigate('tryout')">← Kembali</button>
+            <div>
+              <h1 class="section-title">📝 Daftar Subtes</h1>
+              <p class="section-subtitle">Pilih subtes yang ingin dikerjakan. Urutan bebas.</p>
+            </div>
           </div>
           <button class="btn btn-danger" onclick="TryoutDetailsPage.handleFinalSubmit()">Submit Final Try Out</button>
         </div>
