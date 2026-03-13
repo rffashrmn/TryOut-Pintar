@@ -6,6 +6,16 @@ const db = require('../config/database');
 const auth = require('../middleware/auth');
 const { authLimiter } = require('../middleware/rateLimiter');
 
+// Diagnostic route
+router.get('/health-check', async (req, res) => {
+  try {
+    await db.execute('SELECT 1');
+    res.json({ status: 'ok', database: 'connected' });
+  } catch (err) {
+    res.status(500).json({ status: 'error', database: 'disconnected', message: err.message });
+  }
+});
+
 // Register
 router.post('/register', authLimiter, [
   body('name').trim().notEmpty().withMessage('Nama Lengkap wajib diisi'),
