@@ -102,9 +102,10 @@ router.post('/purchase/:id', auth, async (req, res) => {
     await conn.execute('INSERT INTO public.user_purchases (user_id, package_type, package_id) VALUES ($1, $2, $3)', [req.user.id, 'tryout', packageId]);
     
     // Add transaction history
+    const debitId = `DEBIT-TO-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     await conn.execute(
-      'INSERT INTO public.payments (user_id, amount, credits_added, status, transaction_type, description) VALUES ($1, $2, $3, $4, $5, $6)',
-      [req.user.id, 0, price, 'success', 'debit', `Pembelian Try Out (Paket ${pkg.package_number})`]
+      'INSERT INTO public.payments (user_id, payment_id, amount, credits_added, status, transaction_type, description) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [req.user.id, debitId, 0, price, 'success', 'debit', `Pembelian Try Out (Paket ${pkg.package_number})`]
     );
 
     await conn.commit();
