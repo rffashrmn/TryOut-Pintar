@@ -97,7 +97,10 @@ const TryoutPage = {
 
   async confirmPurchase(pkgId) {
     Modal.hide();
-    const data = await App.api(`/api/tryout/purchase/${pkgId}`, { method: 'POST' });
+    const data = await App.api(`/api/tryout/purchase/${pkgId}`, { 
+      method: 'POST',
+      body: JSON.stringify({})
+    });
     if (data) {
       Toast.success('Paket berhasil dibeli!');
       await App.refreshUser();
@@ -106,7 +109,10 @@ const TryoutPage = {
   },
 
   async startTryout(pkgId) {
-    const data = await App.api(`/api/tryout/start/${pkgId}`, { method: 'POST' });
+    const data = await App.api(`/api/tryout/start/${pkgId}`, { 
+      method: 'POST',
+      body: JSON.stringify({})
+    });
     if (data) {
       App.navigate('tryout-details', { attempt: data.attempt_id });
     }

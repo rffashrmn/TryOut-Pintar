@@ -260,7 +260,7 @@ router.get('/attempt/:attemptId', auth, async (req, res) => {
 // Save answer
 router.post('/answer', auth, async (req, res) => {
   try {
-    const { attempt_id, question_id, answer, subtest } = req.body;
+    const { attempt_id, question_id, answer, subtest } = req.body || {};
 
 
     const [progress] = await db.execute(
@@ -291,7 +291,7 @@ router.post('/answer', auth, async (req, res) => {
 // Start subtest
 router.post('/subtest/start', auth, async (req, res) => {
   try {
-    const { attempt_id, subtest } = req.body;
+    const { attempt_id, subtest } = req.body || {};
     const [progress] = await db.execute(
       'SELECT subtest_name, status FROM public.tryout_subtest_progress WHERE attempt_id = $1',
       [attempt_id]
@@ -375,7 +375,7 @@ router.post('/submit/:attemptId', auth, async (req, res) => {
     }
 
     const score = calculateTryoutScore(Object.values(subtestResults));
-    const totalTime = req.body.total_time || 0;
+    const totalTime = (req.body && req.body.total_time) ? req.body.total_time : 0;
 
     await conn.execute(
       `UPDATE public.attempts SET status = $1, score = $2, correct_count = $3, wrong_count = $4,

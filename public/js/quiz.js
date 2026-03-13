@@ -116,7 +116,10 @@ const QuizPage = {
   },
 
   async startQuiz(pkgId) {
-    const data = await App.api(`/api/quiz/start/${pkgId}`, { method: 'POST' });
+    const data = await App.api(`/api/quiz/start/${pkgId}`, { 
+      method: 'POST',
+      body: JSON.stringify({})
+    });
     if (data) {
       App.navigate('exam', { type: 'quiz', attempt: data.attempt_id });
     }

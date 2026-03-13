@@ -8,6 +8,7 @@ const App = {
   async api(url, options = {}) {
     const headers = { 'Content-Type': 'application/json' };
     if (this.token) headers['Authorization'] = `Bearer ${this.token}`;
+    if (options.method === 'POST' && !options.body) options.body = JSON.stringify({});
     try {
       const res = await fetch(url, { ...options, headers: { ...headers, ...options.headers } });
       const data = await res.json();

@@ -130,6 +130,7 @@ const TryoutDetailsPage = {
     `);
   },
 
+
   async startSubtest(subtestName) {
     const res = await App.api('/api/tryout/subtest/start', {
       method: 'POST',
@@ -184,7 +185,10 @@ const TryoutDetailsPage = {
   },
 
   async finalSubmit() {
-    const res = await App.api(`/api/tryout/submit/${this.attempt.id}`, { method: 'POST' });
+    const res = await App.api(`/api/tryout/submit/${this.attempt.id}`, { 
+      method: 'POST',
+      body: JSON.stringify({ total_time: 0 })
+    });
     if (res) {
       Toast.success('Try out berhasil disubmit!');
       App.navigate('results', { type: 'tryout', attempt: this.attempt.id });

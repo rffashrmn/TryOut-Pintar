@@ -103,7 +103,7 @@ router.post('/start/:packageId', auth, async (req, res) => {
     const packageId = parseInt(req.params.packageId);
 
     const [purchase] = await db.execute(
-      'SELECT id FROM user_purchases WHERE user_id = $1 AND package_type = $2 AND package_id = $3',
+      'SELECT id FROM public.user_purchases WHERE user_id = $1 AND package_type = $2 AND package_id = $3',
       [req.user.id, 'quiz', packageId]
     );
     if (purchase.length === 0) return res.status(403).json({ error: 'Paket belum dibeli' });
@@ -194,7 +194,7 @@ router.get('/attempt/:attemptId', auth, async (req, res) => {
 // Save answer
 router.post('/answer', auth, async (req, res) => {
   try {
-    const { attempt_id, question_id, answer, time_remaining } = req.body;
+    const { attempt_id, question_id, answer, time_remaining } = req.body || {};
 
     const [attempts] = await db.execute(
       'SELECT id FROM public.attempts WHERE id = $1 AND user_id = $2 AND status = $3',
@@ -252,7 +252,7 @@ router.post('/submit/:attemptId', auth, async (req, res) => {
     }
 
     const score = calculateSubtestScore(correct, answers.length);
-    const totalTime = req.body.total_time || 0;
+    const totalTime = (req.body && req.body.total_time) ? req.body.total_time : 0;
 
     await conn.execute(
       `UPDATE public.attempts SET status = 'completed', score = $1, correct_count = $2, wrong_count = $3,
@@ -282,7 +282,7 @@ router.post('/submit/:attemptId', auth, async (req, res) => {
 router.get('/results/:attemptId', auth, async (req, res) => {
   try {
     const attemptId = parseInt(req.params.attemptId);
-    const [attempts] = await db.execute('SELECT * FROM attempts WHERE id = $1 AND user_id = $2', [attemptId, req.user.id]);
+    const [attempts] = await db.execute('SELECT * FROM public.attempts WHERE id = $1 AND user_id = $2', [attemptId, req.user.id]);
     if (attempts.length === 0) return res.status(404).json({ error: 'Attempt tidak ditemukan' });
 
     const [answerDetails] = await db.execute(
