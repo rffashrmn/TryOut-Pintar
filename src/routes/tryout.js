@@ -323,10 +323,10 @@ router.post('/subtest/start', auth, async (req, res) => {
 // Submit subtest
 router.post('/subtest/submit', auth, async (req, res) => {
   try {
-    const { attempt_id, subtest } = req.body;
+    const { attempt_id, subtest, time_remaining_seconds } = req.body || {};
     await db.execute(
-      "UPDATE public.tryout_subtest_progress SET status = 'completed', started_at = NULL WHERE attempt_id = $1 AND subtest_name = $2",
-      [attempt_id, subtest]
+      "UPDATE public.tryout_subtest_progress SET status = $1, started_at = NULL, time_remaining_seconds = COALESCE($2, time_remaining_seconds) WHERE attempt_id = $3 AND subtest_name = $4",
+      ['completed', time_remaining_seconds, attempt_id, subtest]
     );
     res.json({ success: true });
   } catch (err) {

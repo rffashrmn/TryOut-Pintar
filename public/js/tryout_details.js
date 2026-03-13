@@ -185,9 +185,31 @@ const TryoutDetailsPage = {
   },
 
   async finalSubmit() {
+    // Hitung total waktu pengerjaan: Σ (Original Time - Remaining Time)
+    // Subtes pending = 0 detik pengerjaan
+    let totalElapsedSeconds = 0;
+    this.subtests.forEach(sub => {
+      const p = this.progress.find(pg => pg.subtest_name === sub.subtest);
+      if (!p || p.status === 'pending') {
+        // Belum dikerjakan = 0 detik
+        return;
+      }
+      
+      const originalSeconds = Math.round(parseFloat(sub.time_minutes) * 60);
+      const remainingSeconds = p.time_remaining_seconds;
+      
+      // Jika status in_progress tapi user klik submit final, kita hitung waktu sampai saat ini
+      if (p.status === 'in_progress') {
+        const elapsed = p.elapsed || 0;
+        totalElapsedSeconds += elapsed;
+      } else {
+        totalElapsedSeconds += Math.max(0, originalSeconds - remainingSeconds);
+      }
+    });
+
     const res = await App.api(`/api/tryout/submit/${this.attempt.id}`, { 
       method: 'POST',
-      body: JSON.stringify({ total_time: 0 })
+      body: JSON.stringify({ total_time: totalElapsedSeconds })
     });
     if (res) {
       Toast.success('Try out berhasil disubmit!');

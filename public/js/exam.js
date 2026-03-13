@@ -298,7 +298,11 @@ const ExamPage = {
 
     const body = this.type === 'quiz' 
       ? { total_time: this.totalElapsed }
-      : { attempt_id: this.attempt.id, subtest: this.getCurrentQuestions()[0]?.subtest };
+      : { 
+          attempt_id: this.attempt.id, 
+          subtest: this.getCurrentQuestions()[0]?.subtest,
+          time_remaining_seconds: this.timeRemaining
+        };
 
     const data = await App.api(endpoint, {
       method: 'POST',
