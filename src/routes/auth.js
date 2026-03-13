@@ -9,8 +9,17 @@ const { authLimiter } = require('../middleware/rateLimiter');
 // Diagnostic route
 router.get('/health-check', async (req, res) => {
   try {
-    await db.execute('SELECT 1');
-    res.json({ status: 'ok', database: 'connected' });
+    const [usersCols] = await db.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'users'");
+    const [paymentsCols] = await db.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'payments'");
+    
+    res.json({ 
+      status: 'ok', 
+      database: 'connected',
+      schema: {
+        users: usersCols.map(c => c.column_name),
+        payments: paymentsCols.map(c => c.column_name)
+      }
+    });
   } catch (err) {
     res.status(500).json({ status: 'error', database: 'disconnected', message: err.message });
   }

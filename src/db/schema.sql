@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   role VARCHAR(10) DEFAULT 'user' CHECK (role IN ('user', 'admin')),
   credit_balance INT DEFAULT 0,
+  mayar_customer_id VARCHAR(255) DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,6 +27,7 @@ CREATE TABLE IF NOT EXISTS questions (
   category VARCHAR(100) DEFAULT NULL,
   difficulty VARCHAR(10) DEFAULT 'medium' CHECK (difficulty IN ('easy','medium','hard')),
   question_type VARCHAR(10) DEFAULT 'both' CHECK (question_type IN ('quiz','tryout','both')),
+  image_url TEXT DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_subtest_pkg ON questions(subtest, package_number);
@@ -109,6 +111,8 @@ CREATE TABLE IF NOT EXISTS payments (
   amount DECIMAL(12,2) NOT NULL,
   credits_added INT NOT NULL,
   status VARCHAR(10) DEFAULT 'pending' CHECK (status IN ('pending','success','failed')),
+  transaction_type VARCHAR(10) DEFAULT 'credit' CHECK (transaction_type IN ('credit','debit')),
+  description TEXT DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
