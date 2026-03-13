@@ -5,8 +5,7 @@ const AuthPage = {
       <div class="auth-container fade-in">
         <div class="auth-card">
           <div style="text-align:center;margin-bottom:2rem">
-            <div style="font-size:2.5rem;margin-bottom:0.5rem">🎯</div>
-            <h1>TryOut<span style="color:var(--accent)">Pintar</span></h1>
+            <img src="/tryout_pintar_banner1.png" alt="TryOut Pintar" style="width:auto;max-width:100%;height:auto;margin-bottom:-3rem">
             <p>Masuk ke akun Anda</p>
           </div>
           <form id="login-form">
@@ -66,7 +65,7 @@ const AuthPage = {
       <div class="auth-container fade-in">
         <div class="auth-card">
           <div style="text-align:center;margin-bottom:2rem">
-            <div style="font-size:2.5rem;margin-bottom:0.5rem">🎯</div>
+            <img src="/tryout_pintar_banner1.png" alt="TryOut Pintar" style="width:auto;max-width:100%;height:auto;margin-bottom:-3rem">
             <h1>Daftar Akun</h1>
             <p>Buat akun TryOut Pintar</p>
           </div>
@@ -96,14 +95,14 @@ const AuthPage = {
     `;
     document.getElementById('register-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       // Clear errors
       document.querySelectorAll('.field-error').forEach(el => el.textContent = '');
-      
+
       const btn = e.target.querySelector('button');
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Memproses...';
-      
+
       const res = await App.api('/api/auth/register', {
         method: 'POST',
         body: JSON.stringify({

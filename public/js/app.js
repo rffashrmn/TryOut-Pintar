@@ -110,7 +110,7 @@ const App = {
     nav.className = 'navbar';
     const isAdmin = this.isAdmin();
     nav.innerHTML = `
-      <a href="#dashboard" class="navbar-brand">🎯 TryOut<span>Pintar</span></a>
+      <a href="#dashboard" class="navbar-brand"><img src="/tryout_pintar_banner1.png" alt="Logo" style="height:135px;width:auto"></a>
       <button class="menu-toggle" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">☰</button>
       <div class="navbar-nav">
         <a href="#dashboard" class="${this.getRoute().page === 'dashboard' ? 'active' : ''}">Dashboard</a>
