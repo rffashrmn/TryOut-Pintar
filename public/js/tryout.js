@@ -14,6 +14,14 @@ const TryoutPage = {
           <h1 class="section-title">🎯 Simulasi Try Out UTBK</h1>
           <p class="section-subtitle">Pilih paket try out untuk simulasi ujian sesungguhnya</p>
         </div>
+
+        <div class="card" style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2); margin-bottom:1.5rem; display:flex; align-items:center; gap:1.25rem; padding:1.25rem">
+          <div style="font-size:2rem">🛠️</div>
+          <div>
+            <h4 style="color:var(--accent); margin-bottom:0.25rem; font-weight:700">Tahap Pengembangan</h4>
+            <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.5">Kami sedang dalam proses menambahkan konten soal. Untuk saat ini, soal hanya tersedia pada <strong>Paket 1</strong>. Selamat belajar!</p>
+          </div>
+        </div>
         <div class="grid grid-3" id="tryout-packages">
           ${data.packages.map(pkg => `
             <div class="pkg-card ${pkg.purchased ? 'purchased' : ''}">
@@ -97,7 +105,7 @@ const TryoutPage = {
 
   async confirmPurchase(pkgId) {
     Modal.hide();
-    const data = await App.api(`/api/tryout/purchase/${pkgId}`, { 
+    const data = await App.api(`/api/tryout/purchase/${pkgId}`, {
       method: 'POST',
       body: JSON.stringify({})
     });
@@ -109,7 +117,7 @@ const TryoutPage = {
   },
 
   async startTryout(pkgId) {
-    const data = await App.api(`/api/tryout/start/${pkgId}`, { 
+    const data = await App.api(`/api/tryout/start/${pkgId}`, {
       method: 'POST',
       body: JSON.stringify({})
     });

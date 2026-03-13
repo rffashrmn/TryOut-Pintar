@@ -16,6 +16,14 @@ const QuizPage = {
           <h1 class="section-title">📝 Latihan Quiz</h1>
           <p class="section-subtitle">Pilih subtes dan paket untuk mulai latihan</p>
         </div>
+
+        <div class="card" style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2); margin-bottom:1.5rem; display:flex; align-items:center; gap:1.25rem; padding:1.25rem">
+          <div style="font-size:2rem">🚧</div>
+          <div>
+            <h4 style="color:var(--accent); margin-bottom:0.25rem; font-weight:700">Tahap Pengembangan</h4>
+            <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.5">Saat ini hanya tersedia soal pada <strong>Paket 1</strong>. Paket lainnya masih dalam proses penambahan konten soal dan akan segera tersedia. Terima kasih atas kesabarannya!</p>
+          </div>
+        </div>
         <div class="subtest-tabs" id="quiz-tabs"></div>
         <div id="quiz-packages" class="grid grid-3"></div>
       </div>
@@ -28,7 +36,7 @@ const QuizPage = {
       const pkgs = data.packages[subtest] || [];
       pkgEl.innerHTML = pkgs.map(pkg => {
         const isCompleted = !!pkg.completed_attempt_id;
-        
+
         let actionBtn = '';
         if (isCompleted) {
           actionBtn = `<button class="btn btn-outline btn-sm" style="width:100%" onclick="App.navigate('results', { type: 'quiz', attempt: ${pkg.completed_attempt_id} })">📊 Lihat Hasil</button>`;
@@ -49,9 +57,9 @@ const QuizPage = {
                 <h3 style="font-weight:700;font-size:1rem">Paket ${pkg.package_number}</h3>
                 <p style="color:var(--text-muted);font-size:0.8125rem;margin-top:0.25rem">${pkg.total_questions} soal · ${pkg.time_minutes} menit</p>
               </div>
-              ${isCompleted ? '<span class="badge badge-success">🔒 Selesai & Terkunci</span>' : 
-                (pkg.purchased ? '<span class="badge badge-info">✓ Dibeli</span>' : 
-                (pkg.price_credit === 0 ? '<span class="badge badge-accent">Gratis</span>' : `<span class="badge badge-info">${pkg.price_credit} kredit</span>`))}
+              ${isCompleted ? '<span class="badge badge-success">🔒 Selesai & Terkunci</span>' :
+            (pkg.purchased ? '<span class="badge badge-info">✓ Dibeli</span>' :
+              (pkg.price_credit === 0 ? '<span class="badge badge-accent">Gratis</span>' : `<span class="badge badge-info">${pkg.price_credit} kredit</span>`))}
             </div>
             ${actionBtn}
           </div>
@@ -116,7 +124,7 @@ const QuizPage = {
   },
 
   async startQuiz(pkgId) {
-    const data = await App.api(`/api/quiz/start/${pkgId}`, { 
+    const data = await App.api(`/api/quiz/start/${pkgId}`, {
       method: 'POST',
       body: JSON.stringify({})
     });
