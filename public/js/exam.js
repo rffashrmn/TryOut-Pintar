@@ -121,7 +121,7 @@ const ExamPage = {
             <span class="badge ${q.difficulty === 'easy' ? 'badge-success' : q.difficulty === 'hard' ? 'badge-danger' : 'badge-warning'}">${q.difficulty === 'easy' ? 'Mudah' : q.difficulty === 'hard' ? 'Sulit' : 'Sedang'}</span>
           </div>
           ${q.image_url ? `<div style="margin-bottom:1.5rem;text-align:center"><img src="${q.image_url}" alt="Attachment" style="max-width:100%;border-radius:0.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.2)"></div>` : ''}
-          <p style="font-size:1.0625rem;line-height:1.7">${q.question_text}</p>
+          <p style="font-size:1.0625rem;line-height:1.7;white-space:pre-wrap;">${q.question_text}</p>
         </div>
 
         <div id="options-container">
@@ -129,7 +129,7 @@ const ExamPage = {
             const optKey = `option_${opt.toLowerCase()}`;
             const isSelected = q.user_answer === opt;
             return `<button class="option-btn ${isSelected ? 'selected' : ''}" onclick="ExamPage.selectAnswer('${opt}')">
-              <span class="option-label">${opt}.</span>${q[optKey]}
+              <span class="option-label">${opt}.</span><span style="white-space:pre-wrap;text-align:left;line-height:1.5;">${q[optKey]}</span>
             </button>`;
           }).join('')}
         </div>

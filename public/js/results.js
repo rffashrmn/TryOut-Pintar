@@ -104,7 +104,7 @@ const ResultsPage = {
                 ${a.is_correct ? '<span class="badge badge-success">Benar</span>' : '<span class="badge badge-danger">Salah</span>'}
                 ${!a.user_answer ? '<span class="badge badge-warning">Tidak Dijawab</span>' : ''}
               </div>
-              <p style="margin-bottom:0.75rem;line-height:1.6">${a.question_text}</p>
+              <p style="margin-bottom:0.75rem;line-height:1.6;white-space:pre-wrap;">${a.question_text}</p>
               ${['A','B','C','D','E'].map(opt => {
                 const optKey = `option_${opt.toLowerCase()}`;
                 const isUser = a.user_answer === opt;
@@ -113,7 +113,7 @@ const ResultsPage = {
                 if (isCorrect) cls = 'correct';
                 else if (isUser && !a.is_correct) cls = 'wrong';
                 return `<div class="option-btn ${cls}" style="padding:0.5rem 0.75rem;margin-bottom:0.25rem;cursor:default;font-size:0.8125rem">
-                  <span class="option-label">${opt}.</span>${a[optKey]}
+                  <span class="option-label">${opt}.</span><span style="white-space:pre-wrap;text-align:left;line-height:1.5;">${a[optKey]}</span>
                   ${isCorrect ? ' ✓' : ''}${isUser && !a.is_correct ? ' ✗' : ''}
                 </div>`;
               }).join('')}
@@ -171,7 +171,7 @@ const ResultsPage = {
           ${a.is_correct ? '<span class="badge badge-success">Benar</span>' : '<span class="badge badge-danger">Salah</span>'}
           ${!a.user_answer ? '<span class="badge badge-warning">Tidak Dijawab</span>' : ''}
         </div>
-        <p style="margin-bottom:0.75rem;line-height:1.6">${a.question_text}</p>
+        <p style="margin-bottom:0.75rem;line-height:1.6;white-space:pre-wrap;">${a.question_text}</p>
         ${['A','B','C','D','E'].map(opt => {
           const optKey = `option_${opt.toLowerCase()}`;
           const isUser = a.user_answer === opt;
@@ -180,7 +180,7 @@ const ResultsPage = {
           if (isCorrect) cls = 'correct';
           else if (isUser && !a.is_correct) cls = 'wrong';
           return `<div class="option-btn ${cls}" style="padding:0.5rem 0.75rem;margin-bottom:0.25rem;cursor:default;font-size:0.8125rem">
-            <span class="option-label">${opt}.</span>${a[optKey]}
+            <span class="option-label">${opt}.</span><span style="white-space:pre-wrap;text-align:left;line-height:1.5;">${a[optKey]}</span>
             ${isCorrect ? ' ✓' : ''}${isUser && !a.is_correct ? ' ✗' : ''}
           </div>`;
         }).join('')}
