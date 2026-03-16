@@ -1,7 +1,25 @@
 // Dashboard Page
 const DashboardPage = {
   async render(container) {
-    container.innerHTML = `<div class="container fade-in"><div style="text-align:center;padding:4rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat dashboard...</p></div></div>`;
+    const userName = App.user ? App.user.name : 'Pengguna';
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="margin-bottom:2rem">
+          <h1>Halo, ${userName}! 👋</h1>
+          <p style="color:var(--text-muted)">Siap berlatih hari ini?</p>
+        </div>
+        <div class="grid grid-4" style="margin-bottom:2rem">
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+        </div>
+        <div class="grid grid-2" style="margin-bottom:2rem">
+          <div class="card skeleton skeleton-card" style="height:300px"></div>
+          <div class="card skeleton skeleton-card" style="height:300px"></div>
+        </div>
+      </div>
+    `;
 
     await App.refreshUser();
     const data = await App.api('/api/dashboard');

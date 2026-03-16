@@ -3,7 +3,22 @@ const ResultsPage = {
   async render(container, params) {
     const type = params.type || 'quiz';
     const attemptId = params.attempt;
-    container.innerHTML = `<div class="container fade-in"><div style="text-align:center;padding:4rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat hasil...</p></div></div>`;
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="text-align:center;margin-bottom:2rem">
+          <h1 class="section-title">Hasil ${type === 'tryout' ? 'Try Out' : 'Quiz'}</h1>
+          <p class="section-subtitle">Memuat detail hasil...</p>
+        </div>
+        <div class="grid grid-4" style="margin-bottom:2rem">
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+          <div class="card skeleton skeleton-card" style="height:120px"></div>
+        </div>
+        <div class="card skeleton skeleton-card" style="height:300px;margin-bottom:1.5rem"></div>
+        <div class="card skeleton skeleton-card" style="height:300px"></div>
+      </div>
+    `;
 
     const endpoint = type === 'quiz' ? `/api/quiz/results/${attemptId}` : `/api/tryout/results/${attemptId}`;
     const data = await App.api(endpoint);

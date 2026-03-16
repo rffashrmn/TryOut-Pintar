@@ -1,7 +1,25 @@
 // Quiz Page
 const QuizPage = {
   async render(container) {
-    container.innerHTML = `<div class="container fade-in"><div style="text-align:center;padding:4rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat paket quiz...</p></div></div>`;
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="margin-bottom:2rem">
+          <h1 class="section-title">📝 Latihan Quiz</h1>
+          <p class="section-subtitle">Pilih subtes dan paket untuk mulai latihan</p>
+        </div>
+        <div style="display:flex;gap:1rem;margin-bottom:1.5rem">
+          <div class="skeleton" style="width:80px;height:35px;border-radius:99px"></div>
+          <div class="skeleton" style="width:80px;height:35px;border-radius:99px"></div>
+          <div class="skeleton" style="width:80px;height:35px;border-radius:99px"></div>
+          <div class="skeleton" style="width:80px;height:35px;border-radius:99px"></div>
+        </div>
+        <div class="grid grid-3">
+          <div class="card skeleton skeleton-card" style="height:160px"></div>
+          <div class="card skeleton skeleton-card" style="height:160px"></div>
+          <div class="card skeleton skeleton-card" style="height:160px"></div>
+        </div>
+      </div>
+    `;
 
     const data = await App.api('/api/quiz/packages');
     if (!data) return;

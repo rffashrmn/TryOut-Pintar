@@ -1,6 +1,24 @@
 // Payment Page
 const PaymentPage = {
   async render(container) {
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="margin-bottom:2rem">
+          <h1 class="section-title">💰 Kredit & Pembayaran</h1>
+          <p class="section-subtitle">Beli kredit untuk membuka paket quiz dan try out</p>
+        </div>
+        <div class="grid grid-2" style="margin-bottom:2rem">
+          <div class="card skeleton skeleton-card" style="height:250px"></div>
+          <div class="skeleton-wrapper">
+             <div class="skeleton skeleton-text" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-text" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-text" style="height:3.5rem"></div>
+          </div>
+        </div>
+        <div class="card skeleton skeleton-card" style="height:300px"></div>
+      </div>
+    `;
+
     await App.refreshUser();
     try {
       // Sync balance with Mayar on page load

@@ -1,7 +1,19 @@
 // Tryout Page
 const TryoutPage = {
   async render(container) {
-    container.innerHTML = `<div class="container fade-in"><div style="text-align:center;padding:4rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat paket try out...</p></div></div>`;
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="margin-bottom:2rem">
+          <h1 class="section-title">🎯 Simulasi Try Out UTBK</h1>
+          <p class="section-subtitle">Pilih paket try out untuk simulasi ujian sesungguhnya</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card skeleton skeleton-card" style="height:220px"></div>
+          <div class="card skeleton skeleton-card" style="height:220px"></div>
+          <div class="card skeleton skeleton-card" style="height:220px"></div>
+        </div>
+      </div>
+    `;
 
     const data = await App.api('/api/tryout/packages');
     if (!data) return;

@@ -1,7 +1,15 @@
 // Leaderboard Page
 const LeaderboardPage = {
   async render(container) {
-    container.innerHTML = `<div class="container fade-in"><div style="text-align:center;padding:4rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat ranking...</p></div></div>`;
+    container.innerHTML = `
+      <div class="container fade-in">
+        <div style="margin-bottom:2rem">
+          <h1 class="section-title">🏆 Leaderboard Try Out</h1>
+          <p class="section-subtitle">Peringkat peserta berdasarkan skor try out tertinggi</p>
+        </div>
+        <div class="card skeleton skeleton-card" style="height:400px"></div>
+      </div>
+    `;
 
     const data = await App.api('/api/leaderboard/global');
     if (!data) return;

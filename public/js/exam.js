@@ -15,7 +15,24 @@ const ExamPage = {
     this.type = params.type || 'quiz';
     const attemptId = params.attempt;
     const subtest = params.subtest;
-    container.innerHTML = `<div style="text-align:center;padding:6rem 0"><span class="spinner"></span><p style="color:var(--text-muted);margin-top:1rem">Memuat soal...</p></div>`;
+    container.innerHTML = `
+      <div class="container fade-in" style="padding-top:4rem">
+        <div style="max-width:900px;margin:0 auto;padding:0 1.5rem">
+          <div style="margin-bottom:2rem">
+            <div style="font-weight:700;font-size:1.25rem;color:var(--text-muted)">Mempersiapkan Soal...</div>
+          </div>
+          <div class="skeleton" style="width:100%;height:8px;border-radius:4px;margin-bottom:1.5rem"></div>
+          <div class="card skeleton skeleton-card" style="height:250px;margin-bottom:1.5rem"></div>
+          <div class="skeleton-wrapper">
+             <div class="skeleton skeleton-btn" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-btn" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-btn" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-btn" style="height:3.5rem"></div>
+             <div class="skeleton skeleton-btn" style="height:3.5rem"></div>
+          </div>
+        </div>
+      </div>
+    `;
 
     let endpoint = this.type === 'quiz' ? `/api/quiz/attempt/${attemptId}` : `/api/tryout/attempt/${attemptId}`;
     if (this.type === 'tryout' && subtest) endpoint += `?subtest=${encodeURIComponent(subtest)}`;
